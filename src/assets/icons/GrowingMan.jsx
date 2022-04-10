@@ -2,12 +2,14 @@ import * as React from "react"
 
 const GrowingMan = (props) => (
   <svg
+    className = "icon"
     height={48}
     viewBox="0 0 511.998 511.998"
     width={48}
     xmlns="http://www.w3.org/2000/svg"
+    style={{cursor : "pointer"}}
     {...props}
-    style = {{cursor : "pointer"}}
+    
   >
     <path
       d="M495.475 133.613c5.828-76.02-51.507-120.191-104.985-120.191S279.677 57.593 285.505 133.613z"

@@ -6,7 +6,7 @@ const Main = () => {
     <div className="main">
       <section className="section-up">
         <header className="header">
-          <h1>RANDOM USER APP</h1>
+          <h1 className="title" >RANDOM USER APP</h1>
         </header>
         <Card />
       </section>

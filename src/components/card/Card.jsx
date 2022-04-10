@@ -4,7 +4,7 @@ import Map from "../../assets/icons/Map";
 import "./Card.scss";
 import PadLock from "../../assets/icons/PadLock";
 import GrowingMan from "../../assets/icons/GrowingMan";
-import { BsTelephoneForward } from "react-icons/bs";
+// import { BsTelephoneForward } from "react-icons/bs";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Phone from "../../assets/phone.svg";
@@ -21,14 +21,15 @@ const Card = () => {
 
   useEffect(() => {
     const response = axios("https://randomuser.me/api/").then((res) => {
-      return (
-        setData(res.data.results[0]),
-        setOutput2([
-          res.data.results[0].name.first,
-          " ",
-          res.data.results[0].name.last,
-        ])
-      );
+      // return (
+      //   setData(res.data.results[0]),
+      //   setOutput2([
+      //     res.data.results[0].name.first,
+      //     " ",
+      //     res.data.results[0].name.last,
+      //   ])
+      // );
+      getData();
     });
   }, []);
 

@@ -1,5 +1,4 @@
 
-
 .card-main {
     width: 70%;
     background-color: #FEE3EC;
@@ -11,9 +10,9 @@
     .section1 {
         display: flex;
         justify-content: center;
-        // align-items: center;
         border-bottom: 2px solid #F2789F;
         height: 8rem;
+        
         .image{
             width: 10rem;
             height: 10rem;
@@ -37,7 +36,6 @@
         height: 4rem;
         padding: 0;
         div {
-            // text-align: center;
             display: flex;
             align-items: center;
             border-bottom: 1px solid #F2789F;
@@ -59,7 +57,9 @@
         width: 100%;
         margin-top: 2rem;
         transition: all 600ms;
-        .icon {
+        flex-wrap: wrap;
+        
+        .icon {   
             &:hover {
                 border-bottom: 3px solid #F2789F;
                 padding-bottom: 0.5rem;
@@ -72,6 +72,7 @@
         height: 5rem;
         display: flex;
         justify-content: space-evenly;
+        flex-wrap: wrap;
         margin-top: 3rem;
 
         button {
@@ -93,7 +94,6 @@
         }
     }
     .section5 {
-
         .table {
             width: 90%;
             margin: auto;
@@ -111,4 +111,30 @@
             }
         }
     }
+}
+
+
+@media only screen and (max-width : 992px) {
+    .card-main {
+        width: 90%;
+    }
+
+}
+
+@media only screen and (max-width : 576px) {
+    .section2 {
+        div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+    }
+    .output-up {
+        font-size: 1rem;
+    }
+    .output-down {
+        font-size: 0.3rem;
+        margin-left: 1rem;
+    }     
 }
