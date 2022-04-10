@@ -7,6 +7,7 @@ const PadLock = (props) => (
     width={48}
     xmlns="http://www.w3.org/2000/svg"
     {...props}
+    style = {{cursor : "pointer"}}
   >
     <g data-name="Layer 14">
       <rect fill="#f7d881" height={34} rx={4} width={38} x={4} y={28} />

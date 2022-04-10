@@ -7,10 +7,12 @@ const Map = (props) => (
     style={{
       enableBackground: "new 0 0 512.002 512.002",
       width: "4rem",
-      height: "3.5rem"
+      height: "3.5rem",
+      cursor : "pointer"
     }}
     xmlSpace="preserve"
     {...props}
+    
   >
     <path
       style={{

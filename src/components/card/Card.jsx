@@ -7,6 +7,9 @@ import GrowingMan from "../../assets/icons/GrowingMan";
 import { BsTelephoneForward } from "react-icons/bs";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Phone from "../../assets/phone.svg";
+import Man from "../../assets/man.svg";
+import GrowingWoman from "../../assets/growing-up-woman.svg";
 
 let userArray = [];
 
@@ -17,28 +20,36 @@ const Card = () => {
   let [table, setTable] = useState();
 
   useEffect(() => {
-    const response = axios("https://randomuser.me/api/").then((res) =>{
+    const response = axios("https://randomuser.me/api/").then((res) => {
       return (
         setData(res.data.results[0]),
-        setOutput2([res.data.results[0].name.first, " ", res.data.results[0].name.last])
-      )}
-    );
+        setOutput2([
+          res.data.results[0].name.first,
+          " ",
+          res.data.results[0].name.last,
+        ])
+      );
+    });
   }, []);
 
   const getData = async () => {
     const response = await axios("https://randomuser.me/api/").then((res) => {
-        return (
-            setData(res.data.results[0]),
-            setOutput1("My Name is: "),
-            setOutput2([res.data.results[0].name.first, " ", res.data.results[0].name.last])
-        )
+      return (
+        setData(res.data.results[0]),
+        setOutput1("My Name is: "),
+        setOutput2([
+          res.data.results[0].name.first,
+          " ",
+          res.data.results[0].name.last,
+        ])
+      );
     });
   };
 
   return (
     <main className="card-main">
       <section className="section1">
-        <img src={data?.picture.thumbnail} alt="userImage" className="image" />
+        <img src={data?.picture.large} alt="userImage" className="image" />
       </section>
 
       <section className="section2">
@@ -49,90 +60,149 @@ const Card = () => {
       </section>
 
       <section className="section3">
-        <Woman onClick={() => {
+        {data?.gender == "female" ? (
+          <Woman
+          className = "icon"
+            onClick={() => {
               return (
                 setOutput1("My Name is: "),
                 setOutput2([data?.name.first, " ", data?.name.last])
-              )
-          } } />
+              );
+            }}
+          />
+        ) : (
+          <img
+            className = "icon"
+            src={Man}
+            alt=""
+            style={{ width: "3rem", height: "3rem", cursor: "pointer" }}
+            onClick={() => {
+              return (
+                setOutput1("My Name is: "),
+                setOutput2([data?.name.first, " ", data?.name.last])
+              );
+            }}
+          />
+        )}
+
         <Mail
+          className = "icon"
           onClick={() => {
-              return (
-                setOutput1("My E-Mail is: "),
-                setOutput2(data?.email)
-              )
-          } }
+            return setOutput1("My E-Mail is: "), setOutput2(data?.email);
+          }}
         />
-        <GrowingMan onClick={() => {
-              return (
-                setOutput1("My Age is: "),
-                setOutput2(data?.dob.age)
-              )
-          } } />
-        <Map onClick={() => {
-              return (
-                setOutput1("My Country is: "),
-                setOutput2(data?.location.country)
-              )
-          } } />
-        <BsTelephoneForward style={{ width: "3rem", height: "3rem" }} onClick={() => {
+
+        {data?.gender == "male" ? (
+          <GrowingMan
+            className = "icon"
+            onClick={() => {
+              return setOutput1("My Age is: "), setOutput2(data?.dob.age);
+            }}
+          />
+        ) : (
+          <img
+            className = "icon"
+            src={GrowingWoman}
+            alt=""
+            style={{ width: "3rem", height: "3rem", cursor: "pointer" }}
+            onClick={() => {
+              return setOutput1("My Age is: "), setOutput2(data?.dob.age);
+            }}
+          />
+        )}
+
+        <Map
+          className = "icon"
+          onClick={() => {
+            return (
+              setOutput1("My Country is: "), setOutput2(data?.location.country)
+            );
+          }}
+        />
+
+        {/* <BsTelephoneForward style={{ width: "3rem", height: "3rem" }} onClick={() => {
               return (
                 setOutput1("My Telephone Number is: "),
                 setOutput2(data?.phone)
               )
-          } } />
-        <PadLock onClick={() => {
-              return (
-                setOutput1("My Password is: "),
-                setOutput2(data?.login.password)
-              )
-          } } />
+          } } /> */}
+
+        <img
+          className = "icon"
+          src={Phone}
+          alt="Phone"
+          style={{ width: "3rem", height: "3rem", cursor: "pointer" }}
+          onClick={() => {
+            return (
+              setOutput1("My Telephone Number is: "), setOutput2(data?.phone)
+            );
+          }}
+        />
+
+        <PadLock
+          className = "icon"
+          onClick={() => {
+            return (
+              setOutput1("My Password is: "), setOutput2(data?.login.password)
+            );
+          }}
+        />
       </section>
 
       <section className="section4">
         <div>
           <button onClick={getData}>NEW USER</button>
         </div>
-        <div>
-          <button onClick={() => {
-              return (
-                userArray.push({
-                    firstName : data.name.first,
-                    email : data.email,
-                    phone : data.phone,
-                    age : data.dob.age
-                }),  
-                console.log(userArray),
-                setTable(userArray.length)
-              )
-          } } >ADD USER</button>
 
+        <div>
+          <button
+            onClick={() => {
+              const arrayFilter = userArray?.filter((item) => {
+                  return (
+                    item.firstName == data.name.first
+                  )   
+              })
+              return (
+                  arrayFilter.length == 0 ? 
+                  (userArray.push({
+                    firstName: data.name.first,
+                    email: data.email,
+                    phone: data.phone,
+                    age: data.dob.age,
+                  }),
+                  setTable(userArray.length)) :
+                  alert("The User is Already Exist!!!")
+              );
+            }}
+          >
+            ADD USER
+          </button>
         </div>
       </section>
 
       <section className="section5">
-         {table > 0 &&
-         <table className="table" >
-         <tbody>
-           <tr>
-             <th>FIRST NAME</th>
-             <th>E-MAIL</th>
-             <th>PHONE</th>
-             <th>AGE</th>
-           </tr>
-           {userArray?.map((user, index) => {
-               return (
-                   <tr key={index} >
-                       <td>{user.firstName}</td>
-                       <td>{user.email}</td>
-                       <td>{user.phone}</td>
-                       <td>{user.age}</td>
-                   </tr>
-               )
-           })}
-         </tbody>
-       </table> }
-      
+        {table > 0 && (
+          <table className="table">
+            <tbody>
+              <tr>
+                <th>FIRST NAME</th>
+                <th>E-MAIL</th>
+                <th>PHONE</th>
+                <th>AGE</th>
+              </tr>
+              {userArray?.map((user, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{user.firstName}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phone}</td>
+                    <td>{user.age}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
       </section>
     </main>
   );
