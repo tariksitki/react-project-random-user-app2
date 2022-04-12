@@ -8,6 +8,7 @@ const Main = () => {
         <header className="header">
           <h1 className="title" >RANDOM USER APP</h1>
         </header>
+        
         <Card />
       </section>
     </div>

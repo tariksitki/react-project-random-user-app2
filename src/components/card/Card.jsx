@@ -4,12 +4,12 @@ import Map from "../../assets/icons/Map";
 import "./Card.scss";
 import PadLock from "../../assets/icons/PadLock";
 import GrowingMan from "../../assets/icons/GrowingMan";
-// import { BsTelephoneForward } from "react-icons/bs";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Phone from "../../assets/phone.svg";
 import Man from "../../assets/man.svg";
 import GrowingWoman from "../../assets/growing-up-woman.svg";
+import Table from "../table/Table";
 
 let userArray = [];
 
@@ -17,24 +17,15 @@ const Card = () => {
   const [data, setData] = useState();
   const [output1, setOutput1] = useState("My Name is: ");
   const [output2, setOutput2] = useState("");
-  let [table, setTable] = useState();
+  const [table, setTable] = useState();
 
   useEffect(() => {
-    const response = axios("https://randomuser.me/api/").then((res) => {
-      // return (
-      //   setData(res.data.results[0]),
-      //   setOutput2([
-      //     res.data.results[0].name.first,
-      //     " ",
-      //     res.data.results[0].name.last,
-      //   ])
-      // );
-      getData();
-    });
+    getData();
   }, []);
 
   const getData = async () => {
     const response = await axios("https://randomuser.me/api/").then((res) => {
+      console.log(res)
       return (
         setData(res.data.results[0]),
         setOutput1("My Name is: "),
@@ -121,13 +112,6 @@ const Card = () => {
           }}
         />
 
-        {/* <BsTelephoneForward style={{ width: "3rem", height: "3rem" }} onClick={() => {
-              return (
-                setOutput1("My Telephone Number is: "),
-                setOutput2(data?.phone)
-              )
-          } } /> */}
-
         <img
           className = "icon"
           src={Phone}
@@ -171,7 +155,10 @@ const Card = () => {
                     phone: data.phone,
                     age: data.dob.age,
                   }),
-                  setTable(userArray.length)) :
+
+                  setTable(userArray.length)) 
+                  
+                  :
                   alert("The User is Already Exist!!!")
               );
             }}
@@ -183,26 +170,7 @@ const Card = () => {
 
       <section className="section5">
         {table > 0 && (
-          <table className="table">
-            <tbody>
-              <tr>
-                <th>FIRST NAME</th>
-                <th>E-MAIL</th>
-                <th>PHONE</th>
-                <th>AGE</th>
-              </tr>
-              {userArray?.map((user, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{user.firstName}</td>
-                    <td>{user.email}</td>
-                    <td>{user.phone}</td>
-                    <td>{user.age}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <Table userArray = {userArray} />
         )}
       </section>
     </main>
